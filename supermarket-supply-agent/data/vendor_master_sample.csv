@@ -1,0 +1,3 @@
+VendorID,VendorName,SuppliedItemIDs,VendorRating,PreferredCategory
+V001,DairySuppliers Inc,P001,4.2,Dairy
+V002,FreshBakery Co,P002,4.0,Bakery

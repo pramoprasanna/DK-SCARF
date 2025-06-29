@@ -1,0 +1,4 @@
+ItemID,ItemName,StockQty,Location,VendorID,CategoryName,ProductRating,ShelfLifeDays,BatchID,ExpiryDateBatch,ReturnedQty
+P001,Milk 1L,100,Store A,V001,Dairy,4.3,7,B001,2025-07-05,5
+P001,Milk 1L,50,Store A,V001,Dairy,4.3,7,B002,2025-07-10,2
+P002,Bread Loaf,60,Store B,V002,Bakery,4.0,5,B003,2025-07-03,3

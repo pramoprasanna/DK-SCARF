@@ -80,5 +80,92 @@ A smart autonomous agent that:
 | Prompt Orchestration (optional) | LangChain or CrewAI (if you want advanced agent chaining) |
 
 
+## 📘  ER Diagram Entities with Real-World Data Fields
+
+---
+
+### 🧾 **Customer Sales Data**
+
+| Field                | Description                                            |
+| -------------------- | ------------------------------------------------------ |
+| `SaleID` (PK)        | Unique sale transaction ID                             |
+| `CustomerID` (FK)    | Linked to customer master table                        |
+| `ItemID` (FK)        | Purchased product ID                                   |
+| `QuantitySold`       | Number of units sold                                   |
+| `SaleDate`           | Timestamp of sale                                      |
+| `Channel`            | POS / Online / App                                     |
+| `Returned`           | Boolean: was it returned?                              |
+| `Preordered`         | Boolean: if item was preordered (out-of-stock at sale) |
+| `PurchaseFrequency`  | Derived: daily/weekly/monthly                          |
+| `CustomerTotalSpend` | Aggregate of customer's past purchases                 |
+
+---
+
+### 👤 **Customer Data** (New table)
+
+| Field             | Description                           |
+| ----------------- | ------------------------------------- |
+| `CustomerID` (PK) | Unique customer ID                    |
+| `Name`            | Full name                             |
+| `PhoneNumber`     | Contact                               |
+| `FrequentItems`   | List of frequently purchased item IDs |
+| `LifetimeValue`   | Total amount spent                    |
+| `ReturnsCount`    | Number of returns made                |
+
+---
+
+### 🛒 **Inventory Data**
+
+| Field                         | Description                                     |
+| ----------------------------- | ----------------------------------------------- |
+| `ItemID` (PK)                 | Product SKU / ID                                |
+| `ItemName`                    | Display name                                    |
+| `StockQty`                    | Total quantity in stock                         |
+| `Location`                    | Store or warehouse                              |
+| `VendorID` (FK)               | Linked to vendor                                |
+| `CategoryID` / `CategoryName` | Product grouping                                |
+| `ProductRating`               | Average customer rating                         |
+| `ShelfLifeDays`               | Days until expiry (average)                     |
+| `ExpiryDateBatch`             | Specific expiry per batch                       |
+| `BatchID`                     | If multiple expiry dates for same product exist |
+| `ReturnedQty`                 | Total quantity returned by customers            |
+
+---
+
+### 🚚 **Vendor Orders Data**
+
+| Field           | Description                          |
+| --------------- | ------------------------------------ |
+| `OrderID` (PK)  | Vendor order ID                      |
+| `VendorID` (FK) | Supplier                             |
+| `ItemID` (FK)   | Item ordered                         |
+| `OrderDate`     | Date ordered                         |
+| `QtyOrdered`    | Quantity                             |
+| `LeadTimeDays`  | Time to fulfill order                |
+| `IsFulfilled`   | Boolean                              |
+| `DeliveryDate`  | Actual delivery                      |
+| `ReturnRate`    | % of items returned from this vendor |
+
+---
+
+### 🏢 **Vendor Master Data** (New Table)
+
+| Field               | Description                                      |
+| ------------------- | ------------------------------------------------ |
+| `VendorID` (PK)     | Unique supplier ID                               |
+| `VendorName`        | Display name                                     |
+| `SuppliedItemIDs`   | List of item IDs supplied                        |
+| `VendorRating`      | Derived from return rate, lead time, reliability |
+| `PreferredCategory` | Optional: specialize in dairy, grains, etc.      |
+
+---
+
+## 🧠 Notes for Beginners
+
+* You can **simulate batch expiry** using the same `ItemID` with different `BatchIDs` and `ExpiryDate`s.
+* To track **product return rates**, link customer sales (returned items) back to `ItemID` and `VendorID`.
+* Use **groupby + aggregate in pandas** to simulate `CustomerTotalSpend`, `FrequentItems`, or `VendorRating`.
+
+
 
 

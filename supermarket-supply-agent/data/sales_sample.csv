@@ -1,0 +1,4 @@
+SaleID,CustomerID,ItemID,QuantitySold,SaleDate,Channel,Returned,Preordered,PurchaseFrequency,CustomerTotalSpend
+S001,C001,P001,2,2025-06-25,POS,False,False,Weekly,500
+S002,C001,P002,1,2025-06-26,POS,True,False,Weekly,500
+S003,C002,P001,3,2025-06-27,Online,False,True,Monthly,800
