@@ -168,4 +168,82 @@ A smart autonomous agent that:
 
 
 
+CORE LOGIC
+---
 
+## 🎯 Objective Recap for Logic Layer
+
+> Build the logic to **analyze supermarket data** (Inventory, Sales, Vendor) and produce:
+
+* 🛒 Shortage alerts
+* 📦 Reorder quantity suggestions
+* 🧪 Spoilage/expiry risks
+* 🔁 Vendor reliability insights
+* 🧠 Preprocessed data for GPT prompt input
+
+---
+
+## ✅ Step-by-Step Logic Plan (Beginner-Friendly)
+
+We'll divide the logic into **3 components**, each of which one team member can start with:
+
+---
+
+### 🔹 Step 1: Inventory Logic
+
+👤 Owned by: Dev 1
+
+| Goal                        | Action                                        |
+| --------------------------- | --------------------------------------------- |
+| 🛒 Identify low stock items | If `StockQty` < threshold (e.g. 20)           |
+| 📆 Flag near-expiry batches | Filter `ExpiryDateBatch` within next 5–7 days |
+| 🧾 Group by ProductID       | Aggregate batches, calculate total quantity   |
+| 📌 Output                   | List of products needing reorder or disposal  |
+
+---
+
+### 🔸 Step 2: Sales + Customer Logic
+
+👤 Owned by: Dev 2
+
+| Goal                              | Action                                                |
+| --------------------------------- | ----------------------------------------------------- |
+| 📈 Find top-selling items         | `groupby(ItemID).sum(QuantitySold)` over last 30 days |
+| 🔁 Find frequently returned items | Filter `Returned == True`, count by ItemID            |
+| 🧍‍♀️ Track frequent customers    | Count purchases per `CustomerID`, show top 3 items    |
+| 📌 Output                         | Popular items, customer insights, risky products      |
+
+---
+
+### 🔺 Step 3: Vendor Logic
+
+👤 Owned by: Dev 3
+
+| Goal                              | Action                                            |
+| --------------------------------- | ------------------------------------------------- |
+| 🚚 Calculate vendor lead time avg | `mean(LeadTimeDays)` per VendorID                 |
+| 🔁 Track vendor return rates      | Average `ReturnRate` per vendor from VendorOrders |
+| 🏆 Rate vendors                   | Score them based on fulfillment and return rates  |
+| 📌 Output                         | Ranked vendor table, per product supplier mapping |
+
+---
+
+## 🧱 Folder & File Setup Suggestion
+
+In your repo (PyCharm):
+
+```
+SCARF/
+├── core/
+│   ├── inventory_logic.py
+│   ├── sales_logic.py
+│   └── vendor_logic.py
+```
+
+Each file contains:
+
+* `load_csv()` function
+* `run_analysis()` function
+* Optional: `to_prompt_format()` if preparing for GPT
+
+---
